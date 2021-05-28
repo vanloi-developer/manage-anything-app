@@ -1,12 +1,11 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
 
-const { Schema } = mongoose;
-
-const TodoSchema = Schema({
+const TodoSchema = new Schema({
     title: String,
     content: String,
 });
 
-const TodoModel = mongoose.model('Todos', TodoSchema, 'todos');
+const TodoModel = model('Todos', TodoSchema);
+
 
 export default TodoModel;

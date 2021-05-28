@@ -16,7 +16,7 @@ const apiRoute = require('./src/routes/router');
 const todoRoute = require('./src/routes/todo.router');
 
 const port = process.env.PORT || 1111;
-const isProduction = process.env.NODE_ENV === 'production';
+//const isProduction = process.env.NODE_ENV === 'production';
 const app = express();
 
 app.use(cors());
