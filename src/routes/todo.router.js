@@ -10,8 +10,8 @@ router.get('/:id', TodoController.getTodo);
 
 router.post('/', TodoController.createTodo);
 
-// router.put('/:id', TodoController.updateTodo);
+router.put('/:id', TodoController.updateTodo);
 
-// router.delete('/:id', TodoController.deleteTodo);
+router.delete('/:id', TodoController.deleteTodo);
 
 export default router;

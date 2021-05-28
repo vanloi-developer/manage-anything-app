@@ -14,6 +14,7 @@ connectDatabase();
 
 const apiRoute = require('./src/routes/router');
 const todoRoute = require('./src/routes/todo.router');
+const useRoute = require('./src/routes/user.router');
 
 const port = process.env.PORT || 1111;
 //const isProduction = process.env.NODE_ENV === 'production';
@@ -33,6 +34,7 @@ app.use(morgan('dev'));
 
 app.use('/api', apiRoute.default);
 app.use('/todo', todoRoute.default);
+app.use('/user', useRoute.default);
 
 app.get('/', (req, res) => {
     res.json({

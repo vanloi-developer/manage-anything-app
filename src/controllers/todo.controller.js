@@ -2,31 +2,28 @@ import TodoModel from '../models/todo.model';
 import TodoService from '../services/todo.service';
 const TodoController = {};
 
+// [GET] ['/todo'] Get list todos
 TodoController.getAllTodos = async(req, res) => {
 
-    const todos = await TodoService.getAll();
+    await TodoService
+        .getAll()
+        .then(todos => res.status(200).json({ message: todos, }))
+        .catch(err => res.status(404).json({ message: err }))
 
-    if (todos) {
-        res.status(200).json({
-            message: todos,
-        });
-    } else {
-        res.json({
-            message: 'No data',
-        })
-    };
+
 }
+
+// [GET] ['/todo/:id'] Get a todo
 TodoController.getTodo = async(req, res) => {
 
     const id = req.params.id;
-    const todo = await TodoService.get(id);
-    if (todo) {
-        res.status(200).json({
-            message: todo,
-        })
-    }
+    await TodoService
+        .get(id)
+        .then(data => { data ? res.status(200).json({ data }) : data })
+        .catch(err => res.status(404).json({ message: err }))
 }
 
+// [POST] ['/todo'] Create a new todo
 TodoController.createTodo = async(req, res) => {
 
     const newTodo = new TodoModel({
@@ -37,7 +34,7 @@ TodoController.createTodo = async(req, res) => {
     if (newTodo) {
         await TodoService.create(newTodo)
             .then((newTodo) => {
-                res.status(200).json({
+                res.status(201).json({
 
                     message: "Created a new todo",
                     newTodo
@@ -50,6 +47,37 @@ TodoController.createTodo = async(req, res) => {
                 })
             })
     };
+};
+
+// [PUT] ['/todo/:id] Update a todo
+TodoController.updateTodo = async(req, res) => {
+
+    let _id = req.params.id;
+    let title = req.body.title;
+    let content = req.body.content;
+    let doc = {
+        title: title,
+        content: content
+    };
+
+    //No validated data
+
+    await TodoService
+        .update(_id, doc)
+        .then(updated => res.status(201).json({ message: "Updated", updated }))
+        .catch(err => res.status(403).json({ message: err }));
 }
+
+// [DELETE] ['/todo/:id'] Delete a todo
+TodoController.deleteTodo = async(req, res) => {
+
+    let _id = req.params.id;
+    await TodoService
+        .delete(_id)
+        .then(data => res.status(200).json({ message: data }))
+        .catch(err => res.status(401).json({ message: err }))
+}
+
+
 
 export default TodoController;
