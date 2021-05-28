@@ -16,7 +16,7 @@
   \******************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! express */ \"express\");\n/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var morgan__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! morgan */ \"morgan\");\n/* harmony import */ var morgan__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(morgan__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var helmet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! helmet */ \"helmet\");\n/* harmony import */ var helmet__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(helmet__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var cors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! cors */ \"cors\");\n/* harmony import */ var cors__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(cors__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! path */ \"path\");\n/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_4__);\n/* harmony import */ var _src_configs_db_config__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./src/configs/db.config */ \"./src/configs/db.config.js\");\n/* harmony import */ var dotenv__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! dotenv */ \"dotenv\");\n/* harmony import */ var dotenv__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(dotenv__WEBPACK_IMPORTED_MODULE_6__);\n\n\n\n\n\n\nvar rfs = __webpack_require__(/*! rotating-file-stream */ \"rotating-file-stream\");\n\n\n\ndotenv__WEBPACK_IMPORTED_MODULE_6___default().config();\n(0,_src_configs_db_config__WEBPACK_IMPORTED_MODULE_5__.default)();\n\nvar apiRoute = __webpack_require__(/*! ./src/routes/router */ \"./src/routes/router.js\");\n\nvar todoRoute = __webpack_require__(/*! ./src/routes/todo.router */ \"./src/routes/todo.router.js\");\n\nvar useRoute = __webpack_require__(/*! ./src/routes/user.router */ \"./src/routes/user.router.js\");\n\nvar port = process.env.PORT || 1111; //const isProduction = process.env.NODE_ENV === 'production';\n\nvar app = express__WEBPACK_IMPORTED_MODULE_0___default()();\napp.use(cors__WEBPACK_IMPORTED_MODULE_3___default()());\napp.use(helmet__WEBPACK_IMPORTED_MODULE_2___default()());\napp.use(express__WEBPACK_IMPORTED_MODULE_0___default().json());\napp.use(morgan__WEBPACK_IMPORTED_MODULE_1___default()('dev')); // const accessLogStream = rfs.createStream(\"access.log\", {\n//     interval: '1d',\n//     path: path.join(__dirname, 'log', )\n// });\n//app.use(isProduction ? morgan('combined', { stream: accessLogStream }) : morgan('dev'));\n\napp.use('/api', apiRoute[\"default\"]);\napp.use('/todo', todoRoute[\"default\"]);\napp.use('/user', useRoute[\"default\"]);\napp.get('/', function (req, res) {\n  res.json({\n    message: 'Hello Mr Lợi.',\n    content: 'App is in development stage',\n    status: 'Coding'\n  });\n});\napp.listen(port, function () {\n  console.log(\"Server is running on: http://localhost:\".concat(port));\n});\n\n//# sourceURL=webpack://app_manage-inventory/./index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! express */ \"express\");\n/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var morgan__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! morgan */ \"morgan\");\n/* harmony import */ var morgan__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(morgan__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var helmet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! helmet */ \"helmet\");\n/* harmony import */ var helmet__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(helmet__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var cors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! cors */ \"cors\");\n/* harmony import */ var cors__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(cors__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var _src_routes_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./src/routes/index */ \"./src/routes/index.js\");\n/* harmony import */ var _src_configs_db_config__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./src/configs/db.config */ \"./src/configs/db.config.js\");\n/* harmony import */ var dotenv__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! dotenv */ \"dotenv\");\n/* harmony import */ var dotenv__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(dotenv__WEBPACK_IMPORTED_MODULE_6__);\n\n\n\n\n // import path from 'path';\n// const rfs = require('rotating-file-stream');\n\n\n\ndotenv__WEBPACK_IMPORTED_MODULE_6___default().config();\n(0,_src_configs_db_config__WEBPACK_IMPORTED_MODULE_5__.default)();\nvar port = process.env.PORT || 1111;\nvar isProduction = \"development\" === 'production';\nvar app = express__WEBPACK_IMPORTED_MODULE_0___default()();\napp.use(cors__WEBPACK_IMPORTED_MODULE_3___default()());\napp.use(helmet__WEBPACK_IMPORTED_MODULE_2___default()());\napp.use(express__WEBPACK_IMPORTED_MODULE_0___default().json());\napp.use(morgan__WEBPACK_IMPORTED_MODULE_1___default()('dev')); // const accessLogStream = rfs.createStream(\"access.log\", {\n//     interval: '1d',\n//     path: path.join(__dirname, 'log', )\n// });\n\napp.use(isProduction ? morgan__WEBPACK_IMPORTED_MODULE_1___default()('combined') : morgan__WEBPACK_IMPORTED_MODULE_1___default()('dev')); //Initial routes\n\n(0,_src_routes_index__WEBPACK_IMPORTED_MODULE_4__.default)(app);\napp.listen(port, function () {\n  console.log(\"Server is running on: http://localhost:\".concat(port));\n});\n\n//# sourceURL=webpack://app_manage-inventory/./index.js?");
 
 /***/ }),
 
@@ -67,6 +67,16 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! mongoose */ \"mongoose\");\n/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);\n\nvar Schema = (mongoose__WEBPACK_IMPORTED_MODULE_0___default().Schema);\nvar UserSchema = new Schema({\n  name: String,\n  username: String,\n  password: String\n});\nvar UserModel = mongoose__WEBPACK_IMPORTED_MODULE_0___default().model('Users', UserSchema);\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UserModel);\n\n//# sourceURL=webpack://app_manage-inventory/./src/models/user.model.js?");
+
+/***/ }),
+
+/***/ "./src/routes/index.js":
+/*!*****************************!*\
+  !*** ./src/routes/index.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar apiRoute = __webpack_require__(/*! ./router */ \"./src/routes/router.js\");\n\nvar todoRoute = __webpack_require__(/*! ./todo.router */ \"./src/routes/todo.router.js\");\n\nvar useRoute = __webpack_require__(/*! ./user.router */ \"./src/routes/user.router.js\");\n\nfunction route(app) {\n  app.use('/api', apiRoute[\"default\"]);\n  app.use('/todo', todoRoute[\"default\"]);\n  app.use('/user', useRoute[\"default\"]);\n  app.get('/', function (req, res) {\n    res.json({\n      message: 'Hello Mr Lợi.',\n      content: 'App is in development stage',\n      status: 'Coding'\n    });\n  });\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (route);\n\n//# sourceURL=webpack://app_manage-inventory/./src/routes/index.js?");
 
 /***/ }),
 
@@ -187,26 +197,6 @@ module.exports = require("mongoose");;
 /***/ ((module) => {
 
 module.exports = require("morgan");;
-
-/***/ }),
-
-/***/ "path":
-/*!***********************!*\
-  !*** external "path" ***!
-  \***********************/
-/***/ ((module) => {
-
-module.exports = require("path");;
-
-/***/ }),
-
-/***/ "rotating-file-stream":
-/*!***************************************!*\
-  !*** external "rotating-file-stream" ***!
-  \***************************************/
-/***/ ((module) => {
-
-module.exports = require("rotating-file-stream");;
 
 /***/ })
 

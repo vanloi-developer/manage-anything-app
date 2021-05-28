@@ -2,8 +2,9 @@ import express from 'express';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import cors from 'cors';
-import path from 'path';
-const rfs = require('rotating-file-stream');
+import route from './src/routes/index';
+// import path from 'path';
+// const rfs = require('rotating-file-stream');
 
 
 import connectDatabase from './src/configs/db.config';
@@ -12,12 +13,8 @@ dotenv.config();
 
 connectDatabase();
 
-const apiRoute = require('./src/routes/router');
-const todoRoute = require('./src/routes/todo.router');
-const useRoute = require('./src/routes/user.router');
-
 const port = process.env.PORT || 1111;
-//const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === 'production';
 const app = express();
 
 app.use(cors());
@@ -30,24 +27,10 @@ app.use(morgan('dev'));
 //     path: path.join(__dirname, 'log', )
 // });
 
-//app.use(isProduction ? morgan('combined', { stream: accessLogStream }) : morgan('dev'));
+app.use(isProduction ? morgan('combined') : morgan('dev'));
 
-app.use('/api', apiRoute.default);
-app.use('/todo', todoRoute.default);
-app.use('/user', useRoute.default);
-
-app.get('/', (req, res) => {
-    res.json({
-        message: 'Hello Mr Lợi.',
-        content: 'App is in development stage',
-        status: 'Coding',
-    });
-});
-
-
-
-
-
+//Initial routes
+route(app);
 
 app.listen(port, () => {
     console.log(`Server is running on: http://localhost:${port}`);
