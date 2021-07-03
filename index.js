@@ -2,16 +2,15 @@ import express from 'express';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import cors from 'cors';
-import route from './src/routes/index';
+import route from './src/app/routes/index';
+import connectMongoose from './src/configs/db.config';
 // import path from 'path';
 // const rfs = require('rotating-file-stream');
 
-
-import connectDatabase from './src/configs/db.config';
 import dotenv from 'dotenv';
 dotenv.config();
 
-connectDatabase();
+connectMongoose();
 
 const port = process.env.PORT || 1111;
 const isProduction = process.env.NODE_ENV === 'production';
@@ -29,7 +28,7 @@ app.use(morgan('dev'));
 
 app.use(isProduction ? morgan('combined') : morgan('dev'));
 
-//Initial routes
+//Initial Routes
 route(app);
 
 app.listen(port, () => {
